@@ -19,7 +19,7 @@ public :
 //4 POINT ARRAY(Geometry.h)
 //Definimos la CLASE PointArray
 class PointArray {
-    //Las variables de la clase seran size(tamaño) y un array de elementos Point(points).
+    //Las variables de la clase seran size(tamaÃ±o) y un array de elementos Point(points).
 int size ;
 Point * points ;
 //el metodo resize modificara la variable size.
@@ -37,15 +37,15 @@ PointArray ( const PointArray &pv);
 ~ PointArray ();
 void clear ();
 int getSize () const { return size ;}
-//El metodo push_back desplazara a l aderecha todos los elementos para colocar el elmento que se desea al comienzo.
+//El metodo push_back desplazara a la izquierda todos los elementos para colocar el elmento que se desea al final.
 void push_back ( const Point &p);
-//El metodo insert añadira un elemento en una posicion indicada.
+//El metodo insert aÃ±adira un elemento en una posicion indicada.
 void insert ( const int pos , const Point &p);
 //El metodo remove eliminara un elemento en una posicion indicada.
 void remove ( const int pos );
 Point *get( const int pos);
 // Se llamara a un elemento de la matriz de puntos, si la posicion de ese elmento supera el rango del array
-//devolverá un puntero nulo.
+//devolverÃ¡ un puntero nulo.
 const Point *get( const int pos) const ;
 };
 PointArray :: PointArray () {
@@ -78,16 +78,14 @@ PointArray ::~ PointArray () {
 void PointArray :: resize ( int newSize ) {
     //Reservamos un espacio de memoria para nuestro arreglo de puntos.
 	Point *pts = new Point [ newSize ];
-	// si nuestra variable size es menor que newSize entonces el valor de min size sera newSize
+	// si nuestra variable size es menor que newSize entonces el valor de min size sera size
 	int minSize = ( newSize > size ? size : newSize );
 	//Posteriormente se copia los elementos de pts a points.
 	for (int i = 0; i < minSize ; i++)
 		pts[i] = points [i];
     //siempre se coloca delete[] despues de cada new.
 	delete [] points ;
-	//el valor de size es newSize ahora.
 	size = newSize ;
-	//los elementos de pts estan copiados en points.
 	points = pts ;
 }
 
@@ -102,7 +100,7 @@ void PointArray :: push_back ( const Point &p) {
 }
 
 void PointArray :: insert ( const int pos , const Point &p) {
-    //Se aumenta en 1 el tamño original
+    //Se aumenta en 1 el tamÃ±o original
 	resize ( size + 1);
    // Realizamos una lectura de la posicion del elemento en la posicion p.
 	for (int i = size - 1; i > pos; i --) {
@@ -116,12 +114,12 @@ void PointArray :: insert ( const int pos , const Point &p) {
 void PointArray :: remove ( const int pos ) {
 	if( pos >= 0 && pos < size ) { // pos < size implies size > 0
 	// Shift everything over to the left
-	//Se recorre desde la posicion del elemnto que se desea eliminar hasta el tamaño-2
+	//Se recorre desde la posicion del elemnto que se desea eliminar hasta el tamaÃ±o-2
 	//para posteriormente cambiar los elemntos por el que esta una posicion mas adelante
 		for(int i = pos; i < size - 2; i++) {
 			points [i] = points [i + 1];
 		}
-		//y disminuir en uno el tamaño del arreglo
+		//y disminuir en uno el tamaÃ±o del arreglo
 		resize ( size - 1);
 	}
 }
@@ -145,7 +143,7 @@ protected :
 public :
     //El constructor uno hara un paso por refencia de un arreglo de punteros
     Polygon ( const PointArray &pa);
-    //El otro constructor creara un poligono a partir de un array de Points Y el tamaño de dicho array
+    //El otro constructor creara un poligono a partir de un array de Points Y el tamaÃ±o de dicho array
     Polygon ( const Point points [], const int numPoints );
     //El metodo area se declara;
     virtual double area () const = 0;
@@ -233,7 +231,7 @@ Triangle :: Triangle ( const Point &a, const Point &b, const Point &c)
     int dy01 = points .get (0) ->getY () - points .get (1) ->getY () ,
         dy12 = points .get (1) ->getY () - points .get (2) ->getY () ,
         dy20 = points .get (2) ->getY () - points .get (0) ->getY ();
-        //Se realizan las operaciones para realizar la fórmula de Heron;
+        //Se realizan las operaciones para realizar la fÃ³rmula de Heron;
     double a = std :: sqrt ( dx01 * dx01 + dy01 * dy01 ),
            b = std :: sqrt ( dx12 * dx12 + dy12 * dy12 ),
            c = std :: sqrt ( dx20 * dx20 + dy20 * dy20 );
@@ -244,9 +242,9 @@ Triangle :: Triangle ( const Point &a, const Point &b, const Point &c)
  }
  //Este procedimiento imprimira los atributos de un poligono
  void printAttributes ( Polygon *p) {
-    cout << "p’s area is " << p-> area () << ".\n";
+    cout << "pÂ’s area is " << p-> area () << ".\n";
 
-    cout << "p’s points are :\n";
+    cout << "pÂ’s points are :\n";
     const PointArray *pa = p-> getPoints ();
     for(int i = 0; i < pa -> getSize (); ++i) {
         cout << "(" << pa ->get (i) ->getX () << ", " << pa ->get (i) ->getY () << ")\n";
